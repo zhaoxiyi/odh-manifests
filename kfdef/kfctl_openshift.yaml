@@ -16,10 +16,6 @@ spec:
         path: odhseldon/cluster
     name: odhseldon
   - kustomizeConfig:
-      parameters:
-      # Note: The admin username is admin
-      - name: SUPERSET_ADMIN_PASSWORD
-        value: admin
       repoRef:
         name: manifests
         path: superset

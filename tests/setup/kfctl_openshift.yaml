@@ -18,7 +18,7 @@ spec:
   - kustomizeConfig:
       parameters:
       # Note: The admin username is admin
-      - name: SUPERSET_ADMIN_PASSWORD
+      - name: superset_admin_password
         value: admin
       repoRef:
         name: manifests

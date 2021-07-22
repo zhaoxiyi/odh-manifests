@@ -14,7 +14,11 @@ varReference:
     kind: Deployment
   - path: spec/template/spec/containers[]/resources/limits/memory
     kind: Deployment
-  - path: spec/template/spec/containers[]/image
+  - path: spec/template/spec/containers[]/envFrom/secretRef/name
     kind: Deployment
-  - path: spec/template/spec/initContainers[]/image
+  - path: spec/template/spec/initContainers[]/envFrom/secretRef/name
+    kind: Deployment
+  - path: spec/template/spec/containers[]/env[]/valueFrom/secretKeyRef/name
+    kind: Deployment
+  - path: spec/template/spec/initContainers[]/env[]/valueFrom/secretKeyRef/name
     kind: Deployment
