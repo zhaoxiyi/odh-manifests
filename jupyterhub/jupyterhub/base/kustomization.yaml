@@ -18,6 +18,7 @@ resources:
 - jupyterhub-singleuser-profiles-sizes-configmap.yaml
 - jupyterhub-spark-operator-configmap.yaml
 - jupyterhub-groups-configmap.yaml
+- jupyterhub-notebook-image-puller-rb.yaml
 
 commonLabels:
   opendatahub.io/component: "true"
@@ -64,5 +65,12 @@ vars:
     apiVersion: v1
   fieldref:
     fieldpath: data.jupyterhub_secret
+- name: notebook_destination
+  objref:
+    kind: ConfigMap
+    name: parameters
+    apiVersion: v1
+  fieldref:
+    fieldpath: data.notebook_destination
 configurations:
 - params.yaml

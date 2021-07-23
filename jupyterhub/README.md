@@ -5,7 +5,7 @@ JupyterHub comes with 2 components:
 1. [jupyterhub](#jupyterhub)
 1. [notebook-images](#notebook-images)
 
-## JupyterHub
+## jupyterhub
 
 Contains deployment manifests for JupyterHub instance.
 
@@ -45,7 +45,6 @@ A Secret containing configuration values like JupyterHub DB password or COOKIE_S
         path: jupyterhub/jupyterhub
     name: jupyterhub
 ```
-
 
 ### Overlays
 
@@ -90,3 +89,41 @@ Contains build chain manifest for CUDA enabled ubi 7 based images, provides `ten
 Contains build chain manifest for CUDA 11.0.3 enabled ubi 8 based images with python 3.8 support, provides `tensorflow-gpu` and `pytorch-gpu` enabled notebook image.
 
 *NOTE:* Builds in this overlay require 4-6 GB of memory
+
+## Deploying JupyterHub notebooks to custom namespaces
+
+JupyterHub has support for deploying notebooks to other namespaces. To help facilitate this, we provide a component under `jupyterhub/custom-notebook-deployment`. The steps to deploy are as follows:
+
+1. Create the namespace for JupyterHub to reside in.
+2. Create the namespace for the JupyterHub notebooks to reside in.
+3. Create a kfdef in the jupyterhub namespace with at least the following Kustomize config in it (note how we are specifying the notebook destination under parameters)
+
+    ```yaml
+      - kustomizeConfig:
+          overlays:
+          - storage-class
+          parameters:
+            - name: storage_class
+              value: standard
+            - name: s3_endpoint_url
+              value: "s3.odh.com"
+            - name: notebook_destination
+              value: <namespace from step 2>
+          repoRef:
+            name: manifests
+            path: jupyterhub/jupyterhub
+        name: jupyterhub
+    ```
+
+4. Create a kfdef in the jupyterhub notebook namespace with the following Kustomize config (note how we are specifying the jupyterhub namespace under parameters).
+
+    ```yaml
+        - kustomizeConfig:
+          parameters:
+            - name: jupyterhub_namespace
+              value: <namespace from step 1>
+            repoRef:
+              name: manifests
+              path: jupyterhub/custom-notebook-deployment
+          name: jupyterhub-rbac
+    ```
