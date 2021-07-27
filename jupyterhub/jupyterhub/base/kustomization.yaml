@@ -1,5 +1,6 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+
 resources:
 - jupyterhub-configmap.yaml
 - jupyterhub-secret.yaml
@@ -19,6 +20,13 @@ resources:
 - jupyterhub-spark-operator-configmap.yaml
 - jupyterhub-groups-configmap.yaml
 - jupyterhub-notebook-image-puller-rb.yaml
+- traefik-credentials-secret.yaml
+- traefik-configmap.yaml
+- traefik-deployment.yaml
+- traefik-role.yaml
+- traefik-rolebinding.yaml
+- traefik-serviceaccount.yaml
+- traefik-service.yaml
 
 commonLabels:
   opendatahub.io/component: "true"
@@ -26,7 +34,8 @@ commonLabels:
 
 configMapGenerator:
 - name: parameters
-  env: params.env
+  envs: 
+    - params.env
 generatorOptions:
   disableNameSuffixHash: true
 vars:
@@ -72,5 +81,12 @@ vars:
     apiVersion: v1
   fieldref:
     fieldpath: data.notebook_destination
+- name: traefik_credentials_secret
+  objref:
+    kind: ConfigMap
+    name: parameters
+    apiVersion: v1
+  fieldref:
+    fieldpath: data.traefik_credentials_secret
 configurations:
 - params.yaml
