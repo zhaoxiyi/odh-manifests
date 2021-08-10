@@ -13,6 +13,8 @@ data:
       address = ":8081"
       [entryPoints.auth_api]
       address = ":8099"
+      [entryPoints.metrics]
+      address = ":8082"
       [api]
       dashboard = false
       entrypoint = "auth_api"
@@ -28,3 +30,6 @@ data:
       watch = true
       [ping]
       entryPoint = "healthz"
+      [metrics.prometheus]
+      buckets = [0.1,0.3,1.2,5.0]
+      entryPoint = "metrics"
