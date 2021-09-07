@@ -26,12 +26,19 @@ spec:
             items:
               - key: config-coordinator.properties
                 path: config-coordinator.properties
-              - key: jvm.config
-                path: jvm.config
+              - key: jvm-coordinator.config
+                path: jvm-coordinator.config
               - key: log.properties
                 path: log.properties
               - key: node.properties
                 path: node.properties
+        - name: prometheus-exporter
+          secret:
+            secretName: trino-config-monitoring
+            defaultMode: 420
+            items:
+              - key: config.yaml
+                path: config.yaml
         - name: trino-catalogs-volume
           secret:
             secretName: trino-catalog
@@ -72,8 +79,11 @@ spec:
           volumeMounts:
             - name: trino-config-volume
               mountPath: /etc/trino
+            - name: prometheus-exporter
+              mountPath: /etc/trino/prometheus
             - name: trino-catalogs-volume
               mountPath: /etc/trino/catalog
-          image: $(trino_image)
+          image: trino
           args:
             - --config=/etc/trino/config-coordinator.properties
+            - --jvm-config=/etc/trino/jvm-coordinator.config

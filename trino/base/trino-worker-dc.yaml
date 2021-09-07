@@ -27,8 +27,8 @@ spec:
             items:
               - key: config-worker.properties
                 path: config-worker.properties
-              - key: jvm.config
-                path: jvm.config
+              - key: jvm-worker.config
+                path: jvm-worker.config
               - key: log.properties
                 path: log.properties
               - key: node.properties
@@ -75,6 +75,7 @@ spec:
               mountPath: /etc/trino
             - name: trino-catalogs-volume
               mountPath: /etc/trino/catalog
-          image: $(trino_image)
+          image: trino
           args:
             - --config=/etc/trino/config-worker.properties
+            - --jvm-config=/etc/trino/jvm-worker.config
