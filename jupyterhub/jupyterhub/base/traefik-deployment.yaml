@@ -78,7 +78,7 @@ spec:
         resources:
           limits:
             cpu: 100m
-            memory: 50Mi
+            memory: 100Mi
 
       - image: quay.io/internaldatahub/configmap-puller:0.1
         imagePullPolicy: Always
