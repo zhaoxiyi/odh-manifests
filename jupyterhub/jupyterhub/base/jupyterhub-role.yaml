@@ -114,9 +114,22 @@ rules:
 - apiGroups:
   - build.openshift.io
   resources:
-    - builds
-    - buildconfigs
+  - builds
+  - buildconfigs
   verbs:
-    - get
-    - list
-    - watch
+  - get
+  - list
+  - watch
+- apiGroups:
+  - coordination.k8s.io
+  resources:
+  - leases
+  verbs:
+  - create
+  - delete
+  - deletecollection
+  - get
+  - list
+  - patch
+  - update
+  - watch

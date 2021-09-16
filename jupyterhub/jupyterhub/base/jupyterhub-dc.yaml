@@ -171,12 +171,10 @@ spec:
           initialDelaySeconds: 40
           periodSeconds: 10
       - name: jupyterhub-ha-sidecar
-        image: 'registry.redhat.io/openshift4/ose-leader-elector-rhel8:v4.7'
+        image: 'quay.io/opendatahub/leader-elector:v0.1'
         args:
-          - '--election=jupyterhub-ha-election'
-          - '--election-namespace=$(NAMESPACE)'
-          - '--http=0.0.0.0:4040'
-          - '--id=$(POD_NAME)'
+          - '-node-id=$(POD_NAME)'
+          - '-namespace=$(NAMESPACE)'
         env:
           - name: NAMESPACE
             valueFrom:
