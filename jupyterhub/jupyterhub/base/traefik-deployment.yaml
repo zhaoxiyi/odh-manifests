@@ -100,3 +100,23 @@ spec:
           limits:
             cpu: 30m
             memory: 20Mi
+        livenessProbe:
+          exec:
+            command:
+              - cat
+              - /watched/rules.toml
+          initialDelaySeconds: 5
+          timeoutSeconds: 1
+          periodSeconds: 5
+          successThreshold: 1
+          failureThreshold: 3
+        readinessProbe:
+          exec:
+            command:
+              - cat
+              - /watched/rules.toml
+          initialDelaySeconds: 5
+          timeoutSeconds: 1
+          periodSeconds: 5
+          successThreshold: 1
+          failureThreshold: 3
