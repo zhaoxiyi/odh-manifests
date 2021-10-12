@@ -99,7 +99,7 @@ spec:
         resources:
           limits:
             cpu: 30m
-            memory: 20Mi
+            memory: 40Mi
         livenessProbe:
           exec:
             command:
