@@ -11,7 +11,7 @@ os::test::junit::declare_suite_start "$MY_SCRIPT"
 function test_promportal() {
     # Check that the UI is indeed up by curling the route
     uiroute=$(oc get route prometheus-portal -o jsonpath="{$.status.ingress[0].host}")
-    os::cmd::try_until_text "curl -s -D - -o /dev/null http://$uiroute/graph" "HTTP/1.1 200 OK"
+    os::cmd::try_until_text "curl -k -s -D - -o /dev/null https://$uiroute/graph" "HTTP/1.1 200 OK"
 }
 
 function test_prometheus() {

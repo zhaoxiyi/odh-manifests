@@ -9,3 +9,6 @@ spec:
     name: prometheus-operated
   port:
     targetPort: web
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
