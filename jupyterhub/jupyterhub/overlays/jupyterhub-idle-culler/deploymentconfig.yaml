@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: jupyterhub-idle-culler
-          image: quay.io/odh-jupyterhub/jupyterhub-img:v0.3.3
+          image: quay.io/odh-jupyterhub/jupyterhub-img:v0.3.5
           env:
             - name: JUPYTERHUB_API_TOKEN
               valueFrom:
