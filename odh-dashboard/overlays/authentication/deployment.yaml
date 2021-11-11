@@ -12,7 +12,7 @@
       - --cookie-secret=SECRET
       - '--openshift-delegate-urls={"/": {"resource": "route", "verb": "get", "name": "odh-dashboard"}}'
       - --skip-auth-regex=^/metrics
-    image: quay.io/openshift/origin-oauth-proxy:4.7.0
+    image: quay.io/openshift/origin-oauth-proxy:4.8.0
     ports:
       - containerPort: 8443
         name: https
