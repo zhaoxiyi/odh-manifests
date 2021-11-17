@@ -90,3 +90,6 @@ spec:
 `enableroutes` should be true when deployed on OpenShift Clusters.
 3. DAG Source
 Dag source can be customized to point to any github repo where DAG files are located in `{your_repo}/airflow/dags`
+
+### Additional Info
+This component will create a [CRD](airflow/cluster/base/app.k8s.io_applications.yaml) for [kubernetes-sig/application](https://github.com/kubernetes-sigs/application) which is a dependency for the Airflow cluster deployment.
