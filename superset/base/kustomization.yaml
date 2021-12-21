@@ -6,15 +6,18 @@ resources:
 - deployment.yaml
 - service.yaml
 - route.yaml
-- secret.yaml
 - supersetdb-deployment.yaml
 - supersetdb-pvc.yaml
 - supersetdb-secret.yaml
 - supersetdb-service.yaml
+- superset-rbac-viewer-role.yaml
+- superset-rbac-viewer-rolebinding.yaml
+- superset-service-account.yaml
 
 commonLabels:
   opendatahub.io/component: "true"
   component.opendatahub.io/name: superset
+  app: superset
 
 namespace: opendatahub
 
@@ -22,6 +25,9 @@ configMapGenerator:
   - name: superset-config
     envs:
       - params.env
+  - name: superset-config-py
+    files:
+      - superset_config.py
 
 vars:
   - name: superset_secret
