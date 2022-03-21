@@ -138,7 +138,10 @@ class CustomSecurityManager(SupersetSecurityManager):
 
     def auth_user_oauth(self, userinfo):
         user = super(CustomSecurityManager, self).auth_user_oauth(userinfo)
-        user.roles.extend([self.find_role(x) for x in userinfo['role_keys']])
+        for rk in userinfo['role_keys']:
+              role = self.find_role(rk)
+              if role is not None and role not in user.roles:
+                user.roles.append(role)
         self.update_user(user)  # update user roles
 
         return user
