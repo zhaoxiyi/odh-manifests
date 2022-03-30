@@ -5,7 +5,7 @@ ARG CHROMEDRIVER_VER=100.0.4896.60
 ARG ORG=opendatahub-io
 ARG BRANCH=master
 ARG ODS_CI_REPO=https://github.com/red-hat-data-services/ods-ci
-ARG ODS_CI_GITREF=master
+ARG ODS_CI_GITREF=releases/1.7.0-5
 
 ENV HOME /root
 WORKDIR /root
