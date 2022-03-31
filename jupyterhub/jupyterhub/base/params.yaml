@@ -4,6 +4,9 @@ varReference:
 - path: subjects/namespace
   kind: ClusterRoleBinding
   apiGroup: authorization.openshift.io
+- path: metadata/name
+  kind: ClusterRoleBinding
+  apiGroup: authorization.openshift.io
 - path: data
   kind: ConfigMap
 - path: metadata/annotations/volume.beta.kubernetes.io\/storage-class
