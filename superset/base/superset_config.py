@@ -43,7 +43,7 @@ SQLALCHEMY_ENGINE_OPTIONS = {
 # Set Webserver timeout to 30 minutes to wait for the queries to be executed
 SUPERSET_WEBSERVER_TIMEOUT = 1800
 
-SYSTEM_CERT_BUNDLE = '/etc/ssl/certs/ca-certificates.crt'
+SYSTEM_CERT_BUNDLE = '/etc/ssl/certs/ca-bundle.crt'
 CLUSTER_CERT_BUNDLE = '/run/secrets/kubernetes.io/serviceaccount/ca.crt'
 COMBINED_CERT_BUNDLE = '/tmp/superset-combined-cert-bundle.crt'
 
