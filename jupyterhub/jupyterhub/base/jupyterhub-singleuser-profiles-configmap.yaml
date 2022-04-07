@@ -54,3 +54,16 @@ data:
               spark_image: 'quay.io/radanalyticsio/openshift-spark-py36:2.4.5-2'
             return:
               SPARK_CLUSTER: 'metadata.name'
+      gpuTypes:
+      - type: gpu_one
+        node_tolerations:
+        - key: provider
+          operator: Equal
+          value: gpu-node
+          effect: NoSchedule
+        # This is the default NoSchedule toleration that is recognized by the NVIDIA gpu operator
+      - type: nvidia_gpu
+        node_tolerations:
+        - key: "nvidia.com/gpu"
+          operator: Exists
+          effect: NoSchedule
