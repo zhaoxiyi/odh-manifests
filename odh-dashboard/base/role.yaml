@@ -47,3 +47,4 @@ rules:
       - delete
     resources:
       - deploymentconfigs
+      - deploymentconfigs/instantiate
