@@ -18,6 +18,7 @@ commonLabels:
   opendatahub.io/component: "true"
   component.opendatahub.io/name: hue
   component.opendatahub.io/part-of: datacatalog
+  app.kubernetes.io/part-of: datacatalog
 
 generatorOptions:
   disableNameSuffixHash: true

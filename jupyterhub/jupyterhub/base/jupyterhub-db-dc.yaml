@@ -16,6 +16,7 @@ spec:
       labels:
         app: jupyterhub
         deploymentconfig: jupyterhub-db
+        app.kubernetes.io/part-of: jupyterhub
         component.opendatahub.io/name: jupyterhub
         opendatahub.io/component: 'true'
       annotations:

@@ -26,6 +26,7 @@ resources:
 commonLabels:
   opendatahub.io/component: "true"
   component.opendatahub.io/name: "trino"
+  app.kubernetes.io/part-of: "trino"
 
 generatorOptions:
   disableNameSuffixHash: true

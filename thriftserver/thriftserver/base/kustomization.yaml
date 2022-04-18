@@ -20,6 +20,7 @@ commonLabels:
   opendatahub.io/component: "true"
   component.opendatahub.io/name: thriftserver
   component.opendatahub.io/part-of: datacatalog
+  app.kubernetes.io/part-of: thriftserver
 
 generatorOptions:
   disableNameSuffixHash: true

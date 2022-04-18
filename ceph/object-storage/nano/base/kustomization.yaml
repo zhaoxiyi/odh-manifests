@@ -10,6 +10,7 @@ resources:
 commonLabels:
   opendatahub.io/component: "true"
   component.opendatahub.io/name: ceph-nano
+  app.kubernetes.io/part-of: ceph-nano
 
 images:
 - name: ceph/daemon

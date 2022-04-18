@@ -62,6 +62,7 @@ spec:
         deploymentconfig: jupyterhub
         component: web
         component.opendatahub.io/name: jupyterhub
+        app.kubernetes.io/part-of: jupyterhub
         opendatahub.io/component: 'true'
     spec:
       affinity:

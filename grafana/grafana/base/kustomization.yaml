@@ -6,6 +6,7 @@ namespace: openshift-operators
 commonLabels:
   opendatahub.io/component: "true"
   component.opendatahub.io/name: grafana
+  app.kubernetes.io/part-of: grafana
 
 bases:
   - ./argo-dashboards/

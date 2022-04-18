@@ -9,6 +9,7 @@ namespace: opendatahub
 commonLabels:
   opendatahub.io/component: "true"
   component.opendatahub.io/name: odhargo
+  app.kubernetes.io/part-of: odhargo
 
 generatorOptions:
   disableNameSuffixHash: true

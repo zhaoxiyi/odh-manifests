@@ -10,6 +10,7 @@ resources:
 commonLabels:
   component.opendatahub.io/name: pachyderm
   opendatahub.io/component: "true"
+  app.kubernetes.io/part-of: pachyderm
 
 configMapGenerator:
 - name: pachyderm-deployer-parameters

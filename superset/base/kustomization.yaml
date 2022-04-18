@@ -17,6 +17,7 @@ commonLabels:
   opendatahub.io/component: "true"
   component.opendatahub.io/name: superset
   app: superset
+  app.kubernetes.io/part-of: superset
 
 namespace: opendatahub
 
