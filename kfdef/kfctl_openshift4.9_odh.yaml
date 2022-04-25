@@ -32,6 +32,16 @@ spec:
         path: kafka/kafka
     name: kafka-cluster
   - kustomizeConfig:
+      repoRef:
+        name: manifests
+        path: grafana/cluster
+    name: grafana-cluster
+  - kustomizeConfig:
+      repoRef:
+        name: manifests
+        path: grafana/grafana
+    name: grafana-instance
+  - kustomizeConfig:
       parameters:
       - name: s3_endpoint_url
         value: s3.odh.com
@@ -73,6 +83,6 @@ spec:
     name: odh-dashboard
   repos:
   - name: kf-manifests
-    uri: https://github.com/opendatahub-io/manifests/tarball/v1.3-openshift
+    uri: https://github.com/opendatahub-io/manifests/tarball/v1.4.0-rc.2-openshift
   - name: manifests
-    uri: https://github.com/opendatahub-io/odh-manifests/tarball/v1.1.2
+    uri: https://github.com/opendatahub-io/odh-manifests/tarball/v1.2

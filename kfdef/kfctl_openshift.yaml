@@ -106,7 +106,7 @@ spec:
     name: odh-dashboard
   repos:
   - name: kf-manifests
-    uri: https://github.com/kubeflow/manifests/archive/v1.2-branch.tar.gz
+    uri: https://github.com/opendatahub-io/manifests/tarball/v1.4.0-rc.2-openshift
   - name: manifests
     uri: https://github.com/opendatahub-io/odh-manifests/tarball/master
   version: master
