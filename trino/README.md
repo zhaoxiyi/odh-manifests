@@ -62,19 +62,19 @@ Along with `trino_db_database_name` this parameter configures the Hive Metastore
 
 #### hive_metastore_cpu_request
 
-This parameter will configure the CPU request for Hive Metastore. If not set, the default value `1` will be used instead.
+This parameter will configure the CPU request for Hive Metastore. If not set, the default value `300m` will be used instead.
 
 #### hive_metastore_cpu_limit
 
 This parameter will configure the CPU limit for Hive Metastore. If not set, the default value `1` will be used instead.
 
-#### hive_metastore_memory_request=
+#### hive_metastore_memory_request
 
-This parameter will configure the Memory request for Hive Metastore. If not set, the default value `4Gi` will be used instead.
+This parameter will configure the Memory request for Hive Metastore. If not set, the default value `1Gi` will be used instead.
 
 #### hive_metastore_memory_limit
 
-This parameter will configure the Memory limit for Hive Metastore. If not set, the default value `4Gi` will be used instead.
+This parameter will configure the Memory limit for Hive Metastore. If not set, the default value `1Gi` will be used instead.
 
 #### trino_cpu_request
 

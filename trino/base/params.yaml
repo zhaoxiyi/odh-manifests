@@ -18,5 +18,13 @@ varReference:
     kind: Deployment
   - path: spec/template/spec/containers[]/resources/limits/memory
     kind: Deployment
+  - path: spec/template/spec/containers[]/resources/requests/cpu
+    kind: StatefulSet
+  - path: spec/template/spec/containers[]/resources/limits/cpu
+    kind: StatefulSet
+  - path: spec/template/spec/containers[]/resources/requests/memory
+    kind: StatefulSet
+  - path: spec/template/spec/containers[]/resources/limits/memory
+    kind: StatefulSet
   - path: spec/template/spec/containers[]/env[]/valueFrom/secretKeyRef/name
     kind: StatefulSet

@@ -105,11 +105,11 @@ spec:
           timeoutSeconds: 5
         resources:
           requests:
-            cpu: 500m
-            memory: 512Mi
+            cpu: $(hive_metastore_cpu_request)
+            memory: $(hive_metastore_memory_request)
           limits:
-            cpu: 1
-            memory: 1Gi
+            cpu: $(hive_metastore_cpu_limit)
+            memory: $(hive_metastore_memory_limit)
         volumeMounts:
           - mountPath: /hive-config
             name: hive-config
