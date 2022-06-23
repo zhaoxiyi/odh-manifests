@@ -15,7 +15,7 @@
 # Settings here will be overridden by future product releases and should not
 # be changed unless directed by IBM support
 podsPerRuntime: 2
-headlessService: true
+headlessService: false
 modelMeshImage:
   name: quay.io/opendatahub/modelmesh
   tag: v0.8.0
