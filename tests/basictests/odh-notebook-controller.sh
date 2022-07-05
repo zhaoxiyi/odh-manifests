@@ -67,7 +67,7 @@ function test_notebook_creation() {
     # Verify notebook is reachable trough the Openshift Route
     os::cmd::try_until_text "oc get route ${notebook_name}" "${notebook_name}" $odhdefaulttimeout $odhdefaultinterval
     local notebook_host="$(oc get route ${notebook_name} -o jsonpath='{.spec.host}')"
-    os::cmd::try_until_text "curl -k -s -o /dev/null -w \"%{http_code}\" https://${notebook_host}/api" "200" $odhdefaulttimeout $odhdefaultinterval
+    os::cmd::try_until_text "curl -k -s -o /dev/null -w \"%{http_code}\" https://${notebook_host}/notebook/${ODHPROJECT}/${notebook_name}/api" "200" $odhdefaulttimeout $odhdefaultinterval
 }
 
 function test_notebook_deletion() {

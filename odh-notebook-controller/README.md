@@ -29,7 +29,8 @@ Add the following configuration to your `KfDef` object to install the
 Create a notebook object with the image and other parameters such as the
 environment variables, resource limits, tolerations, etc:
 
-```yaml
+```shell
+notebook_namespace=$(oc config view --minify -o jsonpath='{..namespace}')
 cat <<EOF | oc apply -f -
 ---
 apiVersion: kubeflow.org/v1
@@ -43,14 +44,16 @@ spec:
     spec:
       containers:
         - name: thoth-minimal-oauth-notebook
-          image: quay.io/thoth-station/s2i-minimal-notebook:v0.2.2
+          image: quay.io/thoth-station/s2i-minimal-notebook:v0.3.0
           imagePullPolicy: Always
           workingDir: /opt/app-root/src
           env:
-            - name: JUPYTER_NOTEBOOK_PORT
-              value: "8888"
             - name: NOTEBOOK_ARGS
-              value: "--NotebookApp.token='' --NotebookApp.password=''"
+              value: |
+                --ServerApp.port=8888
+                --ServerApp.token=''
+                --ServerApp.password=''
+                --ServerApp.base_url=/notebook/${notebook_namespace}/thoth-minimal-oauth-notebook
           ports:
             - name: notebook-port
               containerPort: 8888
@@ -63,14 +66,14 @@ spec:
               cpu: "1"
               memory: 1Gi
           livenessProbe:
-            initialDelaySeconds: 5
+            initialDelaySeconds: 10
             periodSeconds: 5
             timeoutSeconds: 1
             successThreshold: 1
             failureThreshold: 3
             httpGet:
               scheme: HTTP
-              path: /api
+              path: /notebook/${notebook_namespace}/thoth-minimal-oauth-notebook/api
               port: notebook-port
 EOF
 ```
@@ -78,10 +81,70 @@ EOF
 Open the notebook URL in your browser:
 
 ```shell
-firefox "$(oc get route thoth-minimal-oauth-notebook -o jsonpath='{.spec.host}')"
+firefox "$(oc get route thoth-minimal-oauth-notebook -o jsonpath='{.spec.host}')/notebook/${notebook_namespace}/thoth-minimal-oauth-notebook"
 ```
 
 Find more examples in the [notebook tests folder](../tests/resources/notebook-controller/).
+
+## Notebook Culling
+
+The notebook controller will scale to zero all the notebooks with last activity
+older than the idle time. The controller will set the
+`notebooks.kubeflow.org/last-activity` annotation when it detects a kernel with
+activity.
+
+To enable this feature, create a configmap with the culling configuration:
+
+- **ENABLE_CULLING**: Enable culling feature (false by default).
+- **IDLENESS_CHECK_PERIOD**: Polling frequency to update notebook last activity.
+- **CULL_IDLE_TIME**: Maximum time to scale notebook to zero if no activity.
+
+When the controller scales down the notebook pods, it will add the
+`kubeflow-resource-stopped` annotation. Remove this annotation to start the
+notebook server again.
+
+For example, poll notebooks activity every 5 minutes and shutdown those that
+have been in an idle state for more than 60 minutes:
+
+```yaml
+cat <<EOF | oc apply -f -
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: notebook-controller-culler-config
+data:
+  ENABLE_CULLING: "true"
+  CULL_IDLE_TIME: "60" # In minutes (1 hour)
+  IDLENESS_CHECK_PERIOD: "5" # In minutes
+EOF
+```
+
+Restart the notebook controller deployment to refresh the configuration:
+
+```shell
+oc rollout restart deploy/notebook-controller-deployment
+```
+
+### Culling endpoint
+
+The notebook controller [polls the
+activity](https://github.com/kubeflow/kubeflow/blob/100657e8d1072136adf0a39315498b3d510c7c49/components/notebook-controller/pkg/culler/culler.go#L153-L155)
+from a specific path:
+
+```go
+url := fmt.Sprintf(
+    "http://%s.%s.svc.%s/notebook/%s/%s/api/kernels",
+    nm, ns, domain, ns, nm)
+```
+
+Make sure the notebook is exposing the kernels at this path by configuring the
+`base_url` parameter:
+
+```shell
+jupyter lab ... \
+  --ServerApp.base_url=/notebook/${nb_namespace}/${nb_name}
+```
 
 ## Updating Manifests
 

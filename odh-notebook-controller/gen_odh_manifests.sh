@@ -5,7 +5,7 @@ ctrl_dir="odh-notebook-controller"
 ctrl_repository="github.com/opendatahub-io/kubeflow"
 ctrl_branch="master"
 ctrl_image="quay.io/opendatahub/odh-notebook-controller"
-ctrl_tag="1.6-343096a"
+ctrl_tag="1.6-55d78ca"
 ctrl_namespace="opendatahub"
 
 cleanup() {
