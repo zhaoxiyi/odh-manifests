@@ -146,6 +146,42 @@ jupyter lab ... \
   --ServerApp.base_url=/notebook/${nb_namespace}/${nb_name}
 ```
 
+## Notebook GPU
+
+Install the [NVIDIA GPU Operator](https://github.com/NVIDIA/gpu-operator) in
+your cluster.
+
+When the operator is installed, make sure it labeled the nodes in your cluster
+with the number of GPUs available, for example:
+
+```shell
+$ oc get node ${GPU_NODE_NAME} -o yaml | grep "nvidia.com/gpu.count"
+nvidia.com/gpu.count: "1"
+```
+
+In the notebook object, add the number of GPUs to use in the
+`notebook.spec.template.spec.containers.resources` field:
+
+```yaml
+resources:
+  requests:
+    nvidia.com/gpu: "1"
+  limits:
+    nvidia.com/gpu: "1"
+```
+
+Allow the notebook to be scheduled in a GPU node by adding the following
+toleration to the `notebook.spec.template.spec.tolerations` field:
+
+```yaml
+tolerations:
+  - effect: NoSchedule
+    key: nvidia.com/gpu
+    operator: Exists
+```
+
+Finally, create the notebook and wait until it is scheduled in a GPU node.
+
 ## Updating Manifests
 
 The upstream code must be adapted before being deployed with the Opendatahub
