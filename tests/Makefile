@@ -38,7 +38,5 @@ clean:
 	oc get csv -n openshift-operators -o name | grep strimzi-cluster-operator | xargs oc delete -n openshift-operators || true
 	oc get csv -n openshift-operators -o name | grep opendatahub-operator | xargs oc delete -n openshift-operators || true
 	oc delete subscription -n openshift-operators -l peak.test.subscription=opendatahub-operator
-	oc get mutatingwebhookconfiguration -o name | grep seldon | grep $(ODHPROJECT) | xargs oc delete || true
 	oc get mutatingwebhookconfiguration -o name | grep katib | grep $(ODHPROJECT) | xargs oc delete || true
-	oc get validatingwebhookconfiguration -o name | grep seldon | grep $(ODHPROJECT) | xargs oc delete || true
 	oc get validatingwebhookconfiguration -o name | grep katib | grep $(ODHPROJECT) | xargs oc delete || true
