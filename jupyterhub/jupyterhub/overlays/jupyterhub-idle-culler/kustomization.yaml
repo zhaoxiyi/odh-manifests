@@ -4,5 +4,7 @@ kind: Kustomization
 commonLabels:
   app.kubernetes.io/part-of: jupyterhub
 
+bases:
+  - ../../base
 resources:
-- deploymentconfig.yaml
+  - ./deploymentconfig.yaml

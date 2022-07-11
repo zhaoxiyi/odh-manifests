@@ -74,6 +74,17 @@ Notebook Images do not provide any parameters.
 
 Notebook Images component comes with 3 overlays.
 
+#### [jupyterhub-idle-culler](jupyterhub/overlays/jupyterhub-idle-culler)
+
+Adds a `DeploymentConfig` of the jupyterhub idle culler. It enables shutting down notebooks that are idle for a certain amount of time.
+
+Changes to the culling timeout value can either be made in the `jupyterhub-cfg` `ConfigMap` or in the cluster settings section of the ODH Dashboard.
+
+**Note:** The culling timeout value in the dashboard and manual configuration fo the culler will **not** work if this overlay is deployed together with the operator, as any change to the jupyterhub-cfg `ConfigMap` will be reverted.
+
+
+Jupyterhub-idle-culler repository: https://github.com/jupyterhub/jupyterhub-idle-culler
+
 #### [additional](notebook-images/overlays/additional/)
 
 Contains additional Jupyter notebook images.
