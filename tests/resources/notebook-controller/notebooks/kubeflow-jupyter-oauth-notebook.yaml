@@ -1,4 +1,20 @@
 ---
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  name: kubeflow-jupyter-scipy
+spec:
+  tags:
+    - name: v1.6.0
+      from:
+        kind: DockerImage
+        name: docker.io/kubeflownotebookswg/jupyter-scipy:v1.6.0-rc.0
+      referencePolicy:
+        type: Local
+  lookupPolicy:
+    local: true
+
+---
 apiVersion: kubeflow.org/v1
 kind: Notebook
 metadata:
@@ -14,7 +30,7 @@ spec:
         fsGroup: 100
       containers:
         - name: kubeflow-jupyter-oauth-notebook
-          image: public.ecr.aws/j1r0q0g6/notebooks/notebook-servers/jupyter-scipy:v1.5.0
+          image: image-registry.openshift-image-registry.svc:5000/opendatahub/kubeflow-jupyter-scipy:v1.6.0
           imagePullPolicy: Always
           ports:
             - name: notebook-port

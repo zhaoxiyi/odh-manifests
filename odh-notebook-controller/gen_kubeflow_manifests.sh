@@ -5,7 +5,7 @@ ctrl_dir="kf-notebook-controller"
 ctrl_repository="github.com/opendatahub-io/kubeflow"
 ctrl_branch="master"
 ctrl_image="quay.io/opendatahub/kubeflow-notebook-controller"
-ctrl_tag="1.6-55d78ca"
+ctrl_tag="1.6-57a7a0d"
 ctrl_namespace="opendatahub"
 
 cleanup() {
@@ -38,13 +38,14 @@ echo -n ".. Copying controller/default folder"
 cp -r "${ctrl_controller_dir}/config/default" ${ctrl_dir}/default
 echo -e "\r ✓"
 
-echo -n "   .. Updating controller namespace to opendatahub"
-sed -i 's,namespace:.*,namespace: '${ctrl_namespace}',g' ${ctrl_dir}/default/kustomization.yaml
-echo -e "\r    ✓"
 echo -n ".. Copying controller/overlays folder"
 mkdir ${ctrl_dir}/overlays
 cp -r "${ctrl_controller_dir}/config/overlays/openshift" ${ctrl_dir}/overlays/openshift
 echo -e "\r ✓"
+
+echo -n "   .. Updating controller namespace to opendatahub"
+sed -i 's,namespace:.*,namespace: '${ctrl_namespace}',g' ${ctrl_dir}/overlays/openshift/kustomization.yaml
+echo -e "\r    ✓"
 
 echo -n "   .. Updating controller image"
 sed -i 's,newName:.*,newName: '${ctrl_image}',g' ${ctrl_dir}/overlays/openshift/kustomization.yaml

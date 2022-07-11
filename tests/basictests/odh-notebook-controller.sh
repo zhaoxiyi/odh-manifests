@@ -75,7 +75,7 @@ function test_notebook_deletion() {
     local notebook_path=${1}
     local notebook_name=${2}
     # Delete the notebook object
-    os::cmd::expect_success "oc delete notebook ${notebook_name}"
+    os::cmd::expect_success "oc delete -f ${notebook_path}"
     # Verify the notebook CR does not exist anymore
     os::cmd::try_until_text "oc get notebook ${notebook_name}" "not found" $odhdefaulttimeout $odhdefaultinterval
     # Verify the notebook STS is deleted
