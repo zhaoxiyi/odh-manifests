@@ -1,10 +1,8 @@
 kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: 'system:image-pullers'
+  name: 'jupyterhub-image-puller'
 subjects:
-  # This group is always created by default when a new project is created but we have to explicitly include it to
-  # prevent image pull authorization denials when images are built from source in the JH server namespace
   - kind: Group
     apiGroup: rbac.authorization.k8s.io
     name: 'system:serviceaccounts:$(namespace)'
