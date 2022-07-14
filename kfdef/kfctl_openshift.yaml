@@ -100,6 +100,8 @@ spec:
         path: model-mesh
     name: model-mesh
   - kustomizeConfig:
+      overlays:
+      - authentication
       repoRef:
         name: manifests
         path: odh-dashboard

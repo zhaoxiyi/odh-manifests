@@ -5,5 +5,5 @@ metadata:
     app: jupyterhub
   name: jupyterhub-default-groups-config
 data:
-  admin_groups: ""
-  allowed_groups: ""
+  admin_groups: "odh-jupyterhub-admins"
+  allowed_groups: "system:authenticated"

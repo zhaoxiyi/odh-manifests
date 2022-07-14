@@ -12,6 +12,7 @@ function check_resources() {
     header "Testing dashboard installation"
     os::cmd::expect_success "oc project ${ODHPROJECT}"
     os::cmd::try_until_text "oc get odh-dashboard odh-dashboard" "odh-dashboard" $odhdefaulttimeout $odhdefaultinterval
+    os::cmd::try_until_text "oc get crd odhdashboardconfigs " "odhdashboardconfigs" $odhdefaulttimeout $odhdefaultinterval
     os::cmd::try_until_text "oc get role odh-dashboard" "odh-dashboard" $odhdefaulttimeout $odhdefaultinterval
     os::cmd::try_until_text "oc get rolebinding odh-dashboard" "odh-dashboard" $odhdefaulttimeout $odhdefaultinterval
     os::cmd::try_until_text "oc get route odh-dashboard" "odh-dashboard" $odhdefaulttimeout $odhdefaultinterval
@@ -26,8 +27,8 @@ function check_ui() {
     local route="https://"$(oc get route odh-dashboard -o jsonpath='{.spec.host}')
     os::log::info "$route"
     os::cmd::try_until_text "curl -k -s -o /dev/null -w \"%{http_code}\" $route/api/components" "200" $odhdefaulttimeout $odhdefaultinterval
-    os::cmd::try_until_text "curl -k $route/api/components | jq '.[].key'" "jupyterhub" $odhdefaulttimeout $odhdefaultinterval
-    os::cmd::try_until_text "curl -k $route" "<title>Open Data Hub Dashboard</title>" $odhdefaulttimeout $odhdefaultinterval
+    os::cmd::try_until_text "curl -k $route/api/components | jq '.[].metadata.name'" "jupyterhub" $odhdefaulttimeout $odhdefaultinterval
+    os::cmd::try_until_text "curl -k $route" "<title>Open Data Hub</title>" $odhdefaulttimeout $odhdefaultinterval
 }
 
 check_resources
