@@ -62,6 +62,8 @@ spec:
         path: ceph/object-storage/nano
     name: ceph-nano
   - kustomizeConfig:
+      overlays:
+        - odh-model-controller
       repoRef:
         name: manifests
         path: model-mesh
