@@ -1,6 +1,8 @@
 # OpenShift Pipelines
 
 [OpenShift Pipelines](https://www.openshift.com/learn/topics/pipelines) enables pipelines on OpenShift based on Red Hat's implementation of [Tekton](https://tekton.dev)
+
+**NOTE:** This component is for internal ODH usage, users should rely on the current and official OpenShift Pipelines release available in OpenShift OperatorHub for the latest release and features.
  
 ### Folders
 There is one main folder in the OpenShift Pipelines component

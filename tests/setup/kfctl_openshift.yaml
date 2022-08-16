@@ -32,6 +32,14 @@ spec:
     name: prometheus-operator
   - kustomizeConfig:
       parameters:
+        - name: namespace
+          value: openshift-operators
+      repoRef:
+        name: manifests
+        path: openshift-pipelines/cluster
+    name: openshift-pipelines
+  - kustomizeConfig:
+      parameters:
         - name: s3_endpoint_url
           value: "s3.odh.com"
       repoRef:
