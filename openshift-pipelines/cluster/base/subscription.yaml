@@ -4,9 +4,6 @@ metadata:
   name: openshift-pipelines-operator
   namespace: openshift-operators
 spec:
-  # The channel will need to be changed to 'pipelines-1.7` when running on OCP 4.9+
-  channel: stable
-  installPlanApproval: Automatic
   name: openshift-pipelines-operator-rh
   source: redhat-operators
   sourceNamespace: openshift-marketplace
