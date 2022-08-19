@@ -5,6 +5,7 @@ ODHPROJECT=opendatahub
 # Specify the repo and git ref/branch to use for cloning ods-ci
 ODS_CI_REPO=https://github.com/red-hat-data-services/ods-ci
 ODS_CI_GITREF=master
+OC_CLI_URL=https://mirror.openshift.com/pub/openshift-v4/amd64/clients/ocp/latest/openshift-client-linux.tar.gz
 OPENSHIFT_USER=
 OPENSHIFT_PASS=
 OPENSHIFT_LOGIN_PROVIDER=
@@ -20,7 +21,7 @@ all: test
 test: build run clean
 
 build:
-	podman build -t $(IMAGE) --build-arg ORG=$(GIT_ORG) --build-arg BRANCH=$(GIT_BRANCH) --build-arg ODS_CI_REPO=$(ODS_CI_REPO) --build-arg ODS_CI_GITREF=$(ODS_CI_GITREF) .
+	podman build -t $(IMAGE) --build-arg ORG=$(GIT_ORG) --build-arg BRANCH=$(GIT_BRANCH) --build-arg ODS_CI_REPO=$(ODS_CI_REPO) --build-arg ODS_CI_GITREF=$(ODS_CI_GITREF) --build-arg OC_CLI_URL=$(OC_CLI_URL) .
 
 run:
 	# Confirm that we have a directory for storing any screenshots from selenium tests

@@ -6,6 +6,7 @@ ARG ORG=opendatahub-io
 ARG BRANCH=master
 ARG ODS_CI_REPO=https://github.com/red-hat-data-services/ods-ci
 ARG ODS_CI_GITREF=releases/1.7.0-5
+ARG OC_CLI_URL=https://mirror.openshift.com/pub/openshift-v4/amd64/clients/ocp/latest/openshift-client-linux.tar.gz
 
 ENV HOME /root
 WORKDIR /root
@@ -32,8 +33,9 @@ RUN mkdir -p $HOME/src && \
     git fetch origin ${ODS_CI_GITREF} && git checkout FETCH_HEAD && \
     chmod -R 777 $HOME/src
 
-ADD https://mirror.openshift.com/pub/openshift-v4/clients/oc/4.6/linux/oc.tar.gz $HOME/peak/ 
-RUN tar -C /usr/local/bin -xvf $HOME/peak/oc.tar.gz && \
+# Use a specific destination file name in case the url dow download name changes
+ADD ${OC_CLI_URL} $HOME/peak/oc-cli.tar.gz
+RUN tar -C /usr/local/bin -xvf $HOME/peak/oc-cli.tar.gz && \
     chmod +x /usr/local/bin/oc
 
 RUN curl -o /tmp/chromedriver_linux64.zip -L https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VER}/chromedriver_linux64.zip &&\
