@@ -117,7 +117,7 @@ generatorOptions:
 images:
   - name: superset
     newName: quay.io/opendatahub/superset
-    newTag: "1.4.1-ubi"
+    newTag: "1.5.0-ubi"
   - name: supersetdb
     newName: quay.io/internaldatahub/postgresql-96-centos7
     newTag: "9.6"
