@@ -11,7 +11,7 @@ There is one main folder in the Seldon component
 ### Installation
 To install Seldon add the following to the `kfctl` yaml file.
 
-```
+```yaml
    - kustomizeConfig:
       repoRef:
         name: manifests

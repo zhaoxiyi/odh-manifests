@@ -9,7 +9,7 @@ There is one main folder in the Superset component
 ### Installation
 To install Superset add the following to the `kfctl` yaml file.
 
-```
+```yaml
   - kustomizeConfig:
       repoRef:
         name: manifests

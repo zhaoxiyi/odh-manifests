@@ -15,7 +15,7 @@ Spark Operator does not provide any parameters.
 
 ##### Examples
 
-```
+```yaml
   - kustomizeConfig:
       repoRef:
         name: manifests

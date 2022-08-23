@@ -17,7 +17,7 @@ Airflow Base and Airflow Cluster are deployed via the `base.yaml` and `cluster.y
 Airflow Base deploys base components for Airflow and can be customized.
 
 example
-```
+```yaml
 apiVersion: airflow.apache.org/v1alpha1
 kind: AirflowBase
 metadata:
@@ -45,7 +45,7 @@ Can be changed to custom image and version
 Airflow Cluster deploys cluster components and can be customized
 
 example
-```
+```yaml
 apiVersion: airflow.apache.org/v1alpha1
 kind: AirflowCluster
 metadata:

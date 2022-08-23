@@ -24,7 +24,7 @@ installation and is required for the grafanadashboard instance mentioned above.
 # Installation
 To install Grafana add the following to the `KfDef` in your yaml file.
 
-```
+```yaml
   - kustomizeConfig:
       repoRef:
         name: manifests

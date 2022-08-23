@@ -15,7 +15,7 @@ To install AI Library add the following to the `KfDef` in your yaml file.
 Note, to use AI Library, you also need to have [Seldon](../odhseldon/README.md) installed.
 In addition, Seldon must be placed before ai-library in the KfDef.  This is shown in the example below.
 
-```
+```yaml
    - kustomizeConfig:
       repoRef:
         name: manifests
@@ -36,7 +36,7 @@ In addition, Seldon must be placed before ai-library in the KfDef.  This is show
 ### Instantiate an AI Library instance
 You can install the sample AI Library custom resource found in the AI Library repository by running the following command.
 
-```
+```sh
 oc create -f https://gitlab.com/opendatahub/ai-library/-/raw/master/operator/deploy/crds/ailibrary_v1alpha1_ailibrary_cr.yaml
 ```
 

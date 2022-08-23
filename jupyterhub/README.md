@@ -35,7 +35,7 @@ A Secret containing configuration values like JupyterHub DB password or COOKIE_S
 
 ##### Examples
 
-```
+```yaml
   - kustomizeConfig:
       overlays:
       - storage-class

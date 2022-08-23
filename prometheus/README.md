@@ -2,7 +2,7 @@
 
 Prometheus component subscribes to Prometheus operator, which in turn issues an install of the Prometheus community operator in the namespace. This component also creates two types of instances:
 1. Prometheus instance. This creates a prometheus pod that looks for `ServiceMonitors` with label
-```
+```yaml
   labels:
     team: opendatahub
 ```
@@ -21,7 +21,7 @@ This installation creates a route to the Prometheus portal. To access the portal
 ### Installation
 To install Prometheus add the following to the `kfctl` yaml file.
 
-```
+```yaml
   - kustomizeConfig:
       parameters:
       - name: namespace

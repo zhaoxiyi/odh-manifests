@@ -13,7 +13,7 @@ There is one main folder in the Ceph Object Storage component
 ### Installation
 To install Ceph Object Storage add the following to the `kfctl` yaml file.
 
-```
+```yaml
   - kustomizeConfig:
       repoRef:
         name: manifests
@@ -36,7 +36,7 @@ To install Ceph Object Storage add the following to the `kfctl` yaml file.
   If you hit `ACCESS_DENY`, please clean brower cache and try it again.
 
 * The ACCESS_KEY and SECRET_KEY created for this deployment can be found in `ceph-nano-credentials` secret.
-  ```
+  ```sh
   oc describe secrets/ceph-nano-credentials
 
   Name:         ceph-nano-credentials

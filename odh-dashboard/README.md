@@ -16,7 +16,7 @@ For more information, visit the project [GitHub repo](https://github.com/opendat
    OpenShift cluster before they can access the service
 
 ##### Installation
-```
+```yaml
   - kustomizeConfig:
       repoRef:
         name: manifests
@@ -25,7 +25,7 @@ For more information, visit the project [GitHub repo](https://github.com/opendat
 ```
 
 If you would like to configure the dashboard to require authentication:
-```
+```yaml
   - kustomizeConfig:
       overlays:
         - authentication

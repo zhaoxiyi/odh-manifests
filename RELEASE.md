@@ -8,7 +8,7 @@ We offer branches based on `MAJOR.MINOR` (e.g. `v0.6-branch`) and tags based on 
 
 To create a new release (tag) and branch you can use the `make` command:
 
-```
+```sh
 make prep-release VERSION=0.7.0
 ```
 
@@ -16,7 +16,7 @@ This will result in the branch `v0.7-branch` to be created and a tag `v0.7.0` cr
 
 If you are happy with the result, you can push the branch and the tag to the repository
 
-```
+```sh
 make push-release VERSION=0.7.0
 ```
 
@@ -26,7 +26,7 @@ The `PATCH` release is special because it does not result in the new branch crea
 
 In case the `PATCH` release is not directly from the `master` branch (e.g. updating a security issue in an older version), you need to cherry-pick the commits to the release branch (e.g. `v0.5-branch`) and run the following command only to crete the release:
 
-```
+```sh
 make tag VERSION=0.5.3
 make push-tag VERSION=0.5.3
 ```
@@ -35,7 +35,7 @@ make push-tag VERSION=0.5.3
 
 In case you need to use a specific commit below the top of the `master` (and all commits between it and the previous release), you can use the following command:
 
-```
+```sh
 make prep-release VERSION=0.7.1 UPDATE_TO_COMMIT=<commit-id-below-top-of-master>
 make push-release VERSION=0.7.1
 ```

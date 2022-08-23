@@ -12,7 +12,7 @@ There is one main folder in the OpenShift Pipelines component
 ### Installation
 To install OpenShift Pipelines add the following to the `kfctl` yaml file.
 
-```
+```yaml
   - kustomizeConfig:
       parameters:
         - name: namespace
@@ -25,7 +25,7 @@ To install OpenShift Pipelines add the following to the `kfctl` yaml file.
 
 ### Example
 1. Create a Task that can be included in a Pipeline step
-   ```
+   ```yaml
    apiVersion: tekton.dev/v1beta1
    kind: Task
    metadata:
@@ -46,7 +46,7 @@ To install OpenShift Pipelines add the following to the `kfctl` yaml file.
    ```
 
 1. Create the Pipeline that will include the hello-world task created above
-   ```
+   ```yaml
    apiVersion: tekton.dev/v1beta1
    kind: Pipeline
    metadata:
@@ -63,7 +63,7 @@ To install OpenShift Pipelines add the following to the `kfctl` yaml file.
    ```
 
 1. Finally instantiate the pipeline by creating a PipelineRun.
-   ```
+   ```yaml
    apiVersion: tekton.dev/v1beta1
    kind: PipelineRun
    metadata:

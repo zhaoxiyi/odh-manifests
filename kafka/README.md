@@ -15,7 +15,7 @@ The installed Kafka instance is named odh-message-bus and is intended for genera
 # Installation
 To install Kafka add the following to the `KfDef` in your yaml file.
 
-```
+```yaml
   - kustomizeConfig:
       repoRef:
         name: manifests

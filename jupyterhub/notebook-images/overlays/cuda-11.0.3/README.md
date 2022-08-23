@@ -33,7 +33,7 @@ we have added **6GB** generously to avoid issues.
 ## Deleting CUDA build objects
 All the job and all objects created by the job have the `cuda-version = 11.0.3` label applied.  This label can be used to purge all of the CUDA objects so that the operator can restore the original CUDA build chain
 
-```
+```sh
 oc delete build -l cuda-version=11.0.3
 oc delete bc -l cuda-version=11.0.3
 oc delete is -l cuda-version=11.0.3

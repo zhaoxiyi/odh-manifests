@@ -7,7 +7,7 @@ with docker).
 
 Run the following:
 
-```
+```sh
 cd tests
 make build
 make run
@@ -61,14 +61,14 @@ See the README.md there for more detailed information on how it works.
 
 Note when running on a **mac** you may need to do the following:
 
-```
+```sh
 brew install coreutils
 ln -s /usr/local/bin/greadlink /usr/local/bin/readlink
 ```
 
 Make sure you have an OpenShift login, then do the following:
 
-```bash
+```sh
 git clone https://github.com/AICoE/peak
 cd peak
 git submodule update --init
@@ -79,7 +79,7 @@ echo opendatahub-kubeflow nil https://github.com/opendatahub-io/odh-manifests > 
 
 Note, if you're looking to test another repo and/or branch, you can change the "echo" command from above to something of the following form where "your branch" is optional:
 
-```
+```sh
 echo opendatahub-kubeflow nil <your repo> <your branch> > my-list
 ```
 
@@ -88,7 +88,7 @@ the export line in tests/util to set the value of ODHPROJECT to match name of th
 
 You can run tests individually by passing a substring to run.sh to match:
 
-```bash
+```sh
 ./run.sh ailibrary.sh
 ```
 
@@ -100,6 +100,6 @@ The steps to run this test are:
 
 * Run the tests
 
-  ```bash
+  ```sh
   ./run.sh tests/basictests
   ```
