@@ -18,9 +18,9 @@ Add the following configuration to your `KfDef` object to install the
 ```yaml
 ...
   - kustomizeConfig:
-    repoRef:
-      name: manifests
-      path: odh-notebook-controller
+      repoRef:
+        name: manifests
+        path: odh-notebook-controller
     name: odh-notebook-controller
 ```
 
