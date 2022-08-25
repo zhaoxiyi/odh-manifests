@@ -27,7 +27,7 @@ function create_pipeline() {
     header "Creating a pipeline"
     oc expose service ml-pipeline
     ROUTE=$(oc get route ml-pipeline --template={{.spec.host}})
-    PIPELINE_ID=$(curl -F "uploadfile=@${RESOURCEDIR}/ml-pipelines/test-pipeline-run.yaml" ${ROUTE}/apis/v1beta1/pipelines/upload | jq -r .id)
+    PIPELINE_ID=$(curl -s -F "uploadfile=@${RESOURCEDIR}/ml-pipelines/test-pipeline-run.yaml" ${ROUTE}/apis/v1beta1/pipelines/upload | jq -r .id)
     os::cmd::try_until_text "curl -s ${ROUTE}/apis/v1beta1/pipelines/${PIPELINE_ID} | jq '.name'" "test-pipeline-run.yaml" $odhdefaulttimeout $odhdefaultinterval
 }
 
@@ -39,7 +39,7 @@ function list_pipelines() {
 function create_run() {
     header "Creating a run"
     RUN_ID=$(curl -s -H "Content-Type: application/json" -X POST ${ROUTE}/apis/v1beta1/runs -d "{\"name\":\"test-pipeline-run_run\", \"pipeline_spec\":{\"pipeline_id\":\"${PIPELINE_ID}\"}}" | jq -r .run.id)
-    os::cmd::try_until_text "curl -s ${ROUTE}/apis/v1beta1/runs/${PIPELINE_ID} | jq '.id'" "$RUN_ID" $odhdefaulttimeout $odhdefaultinterval
+    os::cmd::try_until_text "curl -s ${ROUTE}/apis/v1beta1/runs/${RUN_ID} | jq '.run.id'" "$RUN_ID" $odhdefaulttimeout $odhdefaultinterval
 }
 
 function list_runs() {
@@ -67,14 +67,13 @@ function delete_runs() {
     header "Deleting runs"
     os::cmd::try_until_text "curl -s -X DELETE ${ROUTE}/apis/v1beta1/runs/${RUN_ID} | jq" "" $odhdefaulttimeout $odhdefaultinterval
     os::cmd::try_until_text "curl -s ${ROUTE}/apis/v1beta1/runs/${RUN_ID} | jq '.code'" "5" $odhdefaulttimeout $odhdefaultinterval
+    os::cmd::try_until_text "oc get PipelineRun" "No resources found" $odhdefaulttimeout $odhdefaultinterval
+    os::cmd::try_until_text "oc get TaskRun" "No resources found" $odhdefaulttimeout $odhdefaultinterval
 }
 
 function delete_pipeline() {
     header "Deleting the pipeline"
     os::cmd::try_until_text "curl -s -X DELETE ${ROUTE}/apis/v1beta1/pipelines/${PIPELINE_ID} | jq" "" $odhdefaulttimeout $odhdefaultinterval
-    os::cmd::try_until_text "curl -s ${ROUTE}/apis/v1beta1/pipelines/${PIPELINE_ID} | jq '.code'" "5" $odhdefaulttimeout $odhdefaultinterval
-    os::cmd::try_until_text "oc get PipelineRun" "No resources found" $odhdefaulttimeout $odhdefaultinterval
-    os::cmd::try_until_text "oc get TaskRun" "No resources found" $odhdefaulttimeout $odhdefaultinterval
 }
 
 check_resources
