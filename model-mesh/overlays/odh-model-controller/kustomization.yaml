@@ -2,3 +2,5 @@ bases:
 - ./rbac
 - ./manager
 - ./prometheus
+configurations:
+  - params.yaml

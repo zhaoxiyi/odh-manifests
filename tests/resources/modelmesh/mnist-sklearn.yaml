@@ -1,12 +1,14 @@
-apiVersion: serving.kserve.io/v1alpha1
-kind: Predictor
+apiVersion: serving.kserve.io/v1beta1
+kind: InferenceService
 metadata:
-  name: example-mnist-predictor
+  name: example-sklearn-isvc
+  annotations:
+    serving.kserve.io/deploymentMode: ModelMesh
 spec:
-  modelType:
-    name: sklearn
-  path: sklearn/mnist-svm.joblib
-  storage:
-    s3:
-      secretKey: localMinIO
-
+  predictor:
+    model:
+      modelFormat:
+        name: sklearn
+      storage:
+        key: localMinIO
+        path: sklearn/mnist-svm.joblib

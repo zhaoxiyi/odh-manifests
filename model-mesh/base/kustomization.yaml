@@ -8,3 +8,19 @@ resources:
 - ../dependencies/quickstart.yaml
 - ../runtimes
 - ../prometheus
+configMapGenerator:
+  - name: mesh-parameters
+    envs:
+      - params.env
+generatorOptions:
+  disableNameSuffixHash: true
+vars:
+  - name: meshnamespace
+    objref:
+      kind: ConfigMap
+      name: mesh-parameters
+      apiVersion: v1
+    fieldref:
+      fieldpath: metadata.namespace
+configurations:
+  - params.yaml

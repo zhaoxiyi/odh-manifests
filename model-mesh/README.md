@@ -67,4 +67,4 @@ spec:
 
 ```
 
-3. You can now create a new project and create a Predictor CR.
+3. You can now create a new project and create an InferenceService CR.

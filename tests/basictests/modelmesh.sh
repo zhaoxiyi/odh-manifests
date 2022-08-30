@@ -8,7 +8,7 @@ source ${MY_DIR}/../util
 RESOURCEDIR="${MY_DIR}/../resources"
 
 MODEL_PROJECT="${ODHPROJECT}-model"
-PREDICTOR_NAME="example-mnist-predictor"
+PREDICTOR_NAME="example-sklearn-isvc"
 
 
 os::test::junit::declare_suite_start "$MY_SCRIPT"
@@ -31,7 +31,7 @@ function setup_test_serving_namespace() {
     os::cmd::expect_success "oc apply -f ${RESOURCEDIR}/modelmesh/mnist-sklearn.yaml -n ${MODEL_PROJECT}"
     os::cmd::try_until_text "oc get pods -n ${ODHPROJECT} -l app=odh-model-controller --field-selector='status.phase=Running' -o jsonpath='{$.items[*].metadata.name}' | wc -w" "3" $odhdefaulttimeout $odhdefaultinterval
     os::cmd::try_until_text "oc get pods -n ${MODEL_PROJECT} -l name=modelmesh-serving-mlserver-0.x --field-selector='status.phase=Running' -o jsonpath='{$.items[*].metadata.name}' | wc -w" "2" $odhdefaulttimeout $odhdefaultinterval
-    os::cmd::try_until_text "oc get predictor -n ${MODEL_PROJECT} example-mnist-predictor -o jsonpath='{$.status.activeModelState}'" "Loaded" $odhdefaulttimeout $odhdefaultinterval
+    os::cmd::try_until_text "oc get inferenceservice -n ${MODEL_PROJECT} example-sklearn-isvc -o jsonpath='{$.status.modelStatus.states.activeModelState}'" "Loaded" $odhdefaulttimeout $odhdefaultinterval
     oc project ${ODHPROJECT}
 }
 
