@@ -85,16 +85,18 @@ spec:
     name: odh-notebook-controller
   - kustomizeConfig:
       overlays:
-        - metadata-store-mysql
-        - ml-pipeline-ui
+        - metadata-store-mariadb
+        - ds-pipeline-ui
         - object-store-minio
       repoRef:
-        name: manifests
-        path: ml-pipelines
-    name: ml-pipelines
+        name: prototype
+        path: data-science-pipelines
+    name: data-science-pipelines
   repos:
   - name: kf-manifests
     uri: https://github.com/opendatahub-io/manifests/tarball/master
   - name: manifests
     uri: https://github.com/opendatahub-io/odh-manifests/tarball/master
+  - name: prototype
+    uri: https://github.com/rimolive/odh-manifests/tarball/rmartine-upstream
   version: master
