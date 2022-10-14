@@ -88,8 +88,9 @@ spec:
         - metadata-store-mariadb
         - ds-pipeline-ui
         - object-store-minio
+        - default-configs
       repoRef:
-        name: prototype
+        name: manifests
         path: data-science-pipelines
     name: data-science-pipelines
   - kustomizeConfig:
@@ -107,6 +108,4 @@ spec:
     uri: https://github.com/opendatahub-io/manifests/tarball/master
   - name: manifests
     uri: https://github.com/opendatahub-io/odh-manifests/tarball/master
-  - name: prototype
-    uri: https://github.com/rimolive/odh-manifests/tarball/rmartine-upstream
   version: master

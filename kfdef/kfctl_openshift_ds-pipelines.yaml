@@ -12,9 +12,11 @@ spec:
       name: odh-common
     - kustomizeConfig:
         overlays:
-          - metadata-store-mysql
+          - metadata-store-mariadb
           - ds-pipeline-ui
           - object-store-minio
+          - integration-odhdashboard
+          - default-configs
         repoRef:
           name: manifests
           path: data-science-pipelines
