@@ -4,39 +4,32 @@ A repository for [Open Data Hub](https://opendatahub.io) components Kustomize ma
 ## Community
 
 * Website: https://opendatahub.io
-* Documentation: https://opendatahub.io/docs.html (applicable for version 0.5.1)
+* Documentation: https://opendatahub.io/docs.html
 * Mailing lists: https://opendatahub.io/community.html
 * Community meetings: https://gitlab.com/opendatahub/opendatahub-community
 
-## Components
+## ODH Core Components
 
-Open Data Hub is an end-to-end AI/ML platform on top of OpenShift Container Platform which provides various tools for Data Scientists and Engineers. The components currently available are:
+Open Data Hub is an end-to-end AI/ML platform on top of OpenShift Container Platform that provides a core set of integrated components to support end end-to-end MLOps workflow for Data Scientists and Engineers. The components currently available as part of the ODH Core deployment are:
 
-* [JupyterHub](jupyterhub/README.md)
-* [Airflow](airflow/README.md)
-* [Argo Workflows](odhargo/README.md)
-* [Grafana](grafana/README.md) & [Prometheus](prometheus/README.md)
-* [Spark Operator](radanalyticsio/README.md)
-* [Kafka](kafka/README.md)
-* [Superset](superset/README.md)
-* [AI Library](ai-library/README.md)
-* [Seldon](odhseldon/README.md)
-* [Pachyderm](odhpachyderm/README.md)
-* Data Catalog
-    * [Hue](hue/README.md)
-    * [Thrift Server](thriftserver/README.md)
-* [Trino](trino/README.md)
+* [ODH Dashboard](odh-dashboard/README.md)
 * [ODH Notebook Controller](odh-notebook-controller/README.md)
 * [Data Science Pipelines](data-science-pipelines/README.md)
+* [ModelMesh](model-mesh/README.md)
+
+
+Previous versions of ODH relied on [JupyterHub](jupyterhub/README.md) for managing the lifecycle of [Jupyter](https://jupyter.org) notebook pods. Starting with Open Data Hub v1.4, we will be relying on [ODH Notebook Controller](odh-notebook-controller/README.md) for controlling the lifecycle of user Juptyer notebook pods with [ODH Dashboard](odh-dashboard/README.md) as the frontend UI.  When ODH v1.5 is released, we will be moving [jupyterhub-odh](https://github.com/opendatahub-io/jupyterhub-odh) to our [ODH Contrib](https://github.com/opendatahub-io-contrib) organization and officially ending long term support.
+
+Any components that were removed with the update to ODH 1.4 have been relocated to the [ODH Contrib](https://github.com/opendatahub-io-contrib) organization under the [odh-contrib-manifests](https://github.com/opendatahub-io-contrib/odh-contrib-manifests) repo.  You can reference the [odh-contrib kfdef](kfdef/odh-contrib.yaml) as a reference on how to deploy any of the odh-contrib-manifests components
 
 ## Deploy
 
-We are relying on [Kustomize](https://github.com/kubernetes-sigs/kustomize), [kfctl](https://github.com/kubeflow/kfctl) and [Kubeflow Operator](https://github.com/kubeflow/kfctl/blob/master/operator.md) for deployment.
+We are relying on [Kustomize v3](https://github.com/kubernetes-sigs/kustomize), [kfctl](https://github.com/kubeflow/kfctl) and [Open Data Hub Operator](https://github.com/opendatahub-io/opendatahub-operator/blob/master/operator.md) for deployment.
 
 The two ways to deploy are:
 
+1. Following [Getting Started](http://opendatahub.io/docs/getting-started/quick-installation.html) guide using a KFDef from this repository as the custom resource.
 1. Using `kfctl` and follow the documentation at [Kubeflow.org](https://www.kubeflow.org/docs/openshift/). The only change is to use this repository instead of Kubeflow manifests.
-2. Following  [Kubeflow Operator](https://github.com/kubeflow/kfctl/blob/master/operator.md) deployment instructions and then using a KFDef from this repository as the custom resource.
 
 ## Issues
-To submit issues please visit the [Open Data Hub Jira](https://issues.redhat.com/projects/ODH/issues/ODH-380?filter=allopenissues) project. 
+To submit issues please file a GitHub issue in [odh-manifests](https://github.com/opendatahub-io/odh-manifests/issues)

@@ -1,8 +1,0 @@
----
-varReference:
-  - path: data/spark_url
-    kind: ConfigMap
-
-images:
-  - path: spec/customImage
-    kind: SparkCluster
