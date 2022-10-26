@@ -1,6 +1,7 @@
 #!/bin/bash
 
 echo "Installing kfDef from test directory"
+KFDEF_FILENAME=odh-core.yaml
 
 set -x
 ## Install the opendatahub-operator
@@ -38,14 +39,14 @@ else
   git apply ${PULL_NUMBER}.patch
 fi
 popd
-## Point kfctl_openshift.yaml to the manifests in the PR
+## Point manifests repo uri in the KFDEF to the manifests in the PR
 pushd ~/kfdef
 if [ -z "$PULL_NUMBER" ]; then
-  echo "No pull number, not modifying kfctl_openshift.yaml"
+  echo "No pull number, not modifying ${KFDEF_FILENAME}"
 else
   if [ $REPO_NAME == "odh-manifests" ]; then
     echo "Setting manifests in kfctl_openshift to use pull number: $PULL_NUMBER"
-    sed -i "s#uri: https://github.com/opendatahub-io/odh-manifests/tarball/master#uri: https://api.github.com/repos/opendatahub-io/odh-manifests/tarball/pull/${PULL_NUMBER}/head#" ./kfctl_openshift.yaml
+    sed -i "s#uri: https://github.com/opendatahub-io/odh-manifests/tarball/master#uri: https://api.github.com/repos/opendatahub-io/odh-manifests/tarball/pull/${PULL_NUMBER}/head#" ./${KFDEF_FILENAME}
   fi
 fi
 
@@ -75,8 +76,8 @@ if ! [ -z "${SKIP_KFDEF_INSTALL}" ]; then
   echo "Relying on existing KfDef because SKIP_KFDEF_INSTALL was set"
 else
   echo "Creating the following KfDef"
-  cat ./kfctl_openshift.yaml > ${ARTIFACT_DIR}/kfctl_openshift.yaml
-  oc apply -f ./kfctl_openshift.yaml
+  cat ./${KFDEF_FILENAME} > ${ARTIFACT_DIR}/${KFDEF_FILENAME}
+  oc apply -f ./${KFDEF_FILENAME}
   kfctl_result=$?
   if [ "$kfctl_result" -ne 0 ]; then
     echo "The installation failed"

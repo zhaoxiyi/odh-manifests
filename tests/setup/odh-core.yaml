@@ -1,8 +1,8 @@
+# This file should always match the KfDef used to deploy ODH Core components
 apiVersion: kfdef.apps.kubeflow.org/v1
 kind: KfDef
 metadata:
-  name: opendatahub
-  namespace: opendatahub
+  name: odh-core
 spec:
   applications:
   - kustomizeConfig:
@@ -10,6 +10,31 @@ spec:
         name: manifests
         path: odh-common
     name: odh-common
+  - kustomizeConfig:
+      parameters:
+        - name: namespace
+          value: openshift-operators
+      repoRef:
+        name: manifests
+        path: openshift-pipelines/cluster
+    name: openshift-pipelines
+  - kustomizeConfig:
+      overlays:
+      - authentication
+      repoRef:
+        name: manifests
+        path: odh-dashboard
+    name: odh-dashboard
+  - kustomizeConfig:
+      repoRef:
+        name: manifests
+        path: prometheus/cluster
+    name: prometheus-cluster
+  - kustomizeConfig:
+      repoRef:
+        name: manifests
+        path: prometheus/operator
+    name: prometheus-operator
   - kustomizeConfig:
       repoRef:
         name: manifests
@@ -23,32 +48,11 @@ spec:
   - kustomizeConfig:
       repoRef:
         name: manifests
-        path: prometheus/cluster
-    name: prometheus-cluster
-  - kustomizeConfig:
-      repoRef:
-        name: manifests
-        path: prometheus/operator
-    name: prometheus-operator
-  - kustomizeConfig:
-      parameters:
-        - name: namespace
-          value: openshift-operators
-      repoRef:
-        name: manifests
-        path: openshift-pipelines/cluster
-    name: openshift-pipelines
-  - kustomizeConfig:
-      parameters:
-        - name: s3_endpoint_url
-          value: "s3.odh.com"
-      repoRef:
-        name: manifests
-        path: jupyterhub/jupyterhub
-    name: jupyterhub
+        path: odh-notebook-controller
+    name: odh-notebook-controller
   - kustomizeConfig:
       overlays:
-      #- cuda
+      #- cuda-11.0.3
       - additional
       repoRef:
         name: manifests
@@ -56,33 +60,11 @@ spec:
     name: notebook-images
   - kustomizeConfig:
       overlays:
-      - authentication
-      repoRef:
-        name: manifests
-        path: odh-dashboard
-    name: odh-dashboard
-  - kustomizeConfig:
-      repoRef:
-        name: manifests
-        path: ceph/object-storage/scc
-    name: ceph-nano-scc
-  - kustomizeConfig:
-      repoRef:
-        name: manifests
-        path: ceph/object-storage/nano
-    name: ceph-nano
-  - kustomizeConfig:
-      overlays:
         - odh-model-controller
       repoRef:
         name: manifests
         path: model-mesh
     name: model-mesh
-  - kustomizeConfig:
-      repoRef:
-        name: manifests
-        path: odh-notebook-controller
-    name: odh-notebook-controller
   - kustomizeConfig:
       overlays:
         - metadata-store-mariadb
@@ -94,8 +76,7 @@ spec:
         path: data-science-pipelines
     name: data-science-pipelines
   repos:
-  - name: kf-manifests
-    uri: https://github.com/opendatahub-io/manifests/tarball/master
   - name: manifests
     uri: https://github.com/opendatahub-io/odh-manifests/tarball/master
   version: master
+

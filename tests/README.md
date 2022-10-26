@@ -25,7 +25,7 @@ Running `make clean` **will wipe your Open Data Hub installation** and delete th
 
 Without changes, the test image will run `$HOME/peak/installandtest.sh` which
 handles setting up the opendatahub-operator and then creating the KfDef found in
-`tests/setup/kfctl_openshift.yaml`.  If you want to modify your test run, you
+`tests/setup/odh-core.yaml`.  If you want to modify your test run, you
 might want to change those files to get the behavior that you're looking for.
 After you make changes, you will need to rebuild the test image with `make build`.
 
