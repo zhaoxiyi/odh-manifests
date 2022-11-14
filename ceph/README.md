@@ -1,6 +1,6 @@
 # Ceph Object Storage
 
-Deploys [cn-core](https://github.com/cn-core) image that provides object storage for minimal cluster deployments based on a release of [ceph-container](https://github.com/ceph/ceph-container).
+Deploys [cn-core](https://github.com/ceph/cn-core) image that provides object storage for minimal cluster deployments based on a release of [ceph-container](https://github.com/ceph/ceph-container).
 
 [Ceph](https://ceph.io) provides S3 compatible object storage via the RADOS GateWay(RGW) Service
 
