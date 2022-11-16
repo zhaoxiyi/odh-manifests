@@ -37,10 +37,14 @@ This directory contains artifacts for deploying all backend components of Data S
 
 ### Overlays
 
-1. metadata-store-mysql: This overlay contains artifacts for deploying a MySQL database. MySQL is currently the only supported backend for Data Science Pipelines, so if you don't have an existing MySQL database deployed, this overlay needs to be applied.
-2. metadata-store-postgresql: This overlay contains artifacts for deploying a PostgreSQL database. Data Science Pipelines does not currently support PostgreSQL as a backend, so deploying this overlay will not actually modify Data Science Pipelines behaviour.
-3. ds-pipeline-ui: This overlay contains deployment artifacts for the Data Science Pipelines UI. Deploying Data Science Pipelines without this overlay will result in only the backend artifacts being created.
-4. object-store-minio: This overlay contains artifacts for deploying Minio as the Object Store to store Pipelines artifacts.
+1. metadata-store-mariadb: This overlay contains artifacts for deploying a MariaDB database. MySQL-based databases are currently the only supported backend for Data Science Pipelines, so if you don't have an existing MySQL database deployed, this overlay can be applied to satisfy the requirement.
+2. metadata-store-mysql: This overlay contains artifacts for deploying a MySQL database. MySQL-based databases are currently the only supported backend for Data Science Pipelines, so if you don't have an existing MySQL database deployed, this overlay can be applied to satisfy the requirement.
+3. metadata-store-postgresql: This overlay contains artifacts for deploying a PostgreSQL database. Data Science Pipelines does not currently support PostgreSQL as a backend, so deploying this overlay will not actually modify Data Science Pipelines behaviour.
+4. ds-pipeline-ui: This overlay contains deployment artifacts for the Data Science Pipelines UI. Deploying Data Science Pipelines without this overlay will result in only the backend artifacts being created.
+5. object-store-minio: This overlay contains artifacts for deploying Minio as the Object Store to store Pipelines artifacts.
+6. default-configs: This overlay creates ConfigMaps and Secrets with default values for a deployment with both a local MySQL database and Minio object store. *Note*: Using this overlay allows for a simple and quick setup, but also marks the configs as managed objects when used with the ODH Operator, which will reconcile any post-deployment changes made, and cannot be overridden.
+7. integration-odhdashboard: Adds resources required to integrate the Data Science Pipelines application into the ODH Dashboard UI, such as documentation and application launcher tiles.
+8. component-mlmd: Adds the ML-Metadata component which provides artifact lineage tracking in the UI.
 
 ### Prometheus
 
