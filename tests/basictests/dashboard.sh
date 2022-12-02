@@ -15,11 +15,15 @@ ODH_DASHBOARD_URL=
 
 os::test::junit::declare_suite_start "$MY_SCRIPT"
 
+function check_crds() {
+    header "Checking for ODH Dashboard dependencies - CustomResourceDefinitions"
+    os::cmd::try_until_not_text "oc get crd odhdashboardconfigs.opendatahub.io" "NotFound" $odhdefaulttimeout $odhdefaultinterval
+}
+
 function check_resources() {
     header "Testing dashboard installation"
     os::cmd::expect_success "oc project ${ODHPROJECT}"
     os::cmd::try_until_text "oc get odh-dashboard odh-dashboard" "odh-dashboard" $odhdefaulttimeout $odhdefaultinterval
-    os::cmd::try_until_text "oc get crd odhdashboardconfigs " "odhdashboardconfigs" $odhdefaulttimeout $odhdefaultinterval
     os::cmd::try_until_text "oc get role odh-dashboard" "odh-dashboard" $odhdefaulttimeout $odhdefaultinterval
     os::cmd::try_until_text "oc get rolebinding odh-dashboard" "odh-dashboard" $odhdefaulttimeout $odhdefaultinterval
     os::cmd::try_until_text "oc get route odh-dashboard" "odh-dashboard" $odhdefaulttimeout $odhdefaultinterval
@@ -67,6 +71,7 @@ function test_odh_dashboard_ui() {
     popd
 }
 
+check_crds
 check_resources
 # Disabling the REST API check because it requires that the user account has cluster-admin permissions
 # This test should be re-enabled when https://github.com/opendatahub-io/odh-dashboard/issues/548 is resolved
