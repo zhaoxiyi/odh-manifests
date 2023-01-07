@@ -11,8 +11,8 @@ spec:
       name: s2i-minimal-notebook:local-build
   source:
     git:
-      uri: https://github.com/thoth-station/s2i-minimal-notebook
-      ref: v0.0.7
+      uri: https://gitee.com/zhaoxiyi/s2i-minimal-notebook
+      ref: v0.5.1
     type: Git
   strategy:
     sourceStrategy:
