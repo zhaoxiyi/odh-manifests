@@ -74,7 +74,7 @@ data:
         source:
           type: Git
           git:
-            uri: "https://github.com/sclorg/s2i-base-container"
+            uri: "https://gitee.com/zhaoxiyi/s2i-base-container"
             ref: "d777ab3"
           contextDir: "core/"
         strategy:
@@ -102,8 +102,8 @@ data:
         source:
           type: Git
           git:
-            uri: "https://github.com/sclorg/s2i-base-container"
-            ref: "d777ab3"
+            uri: "https://gitee.com/zhaoxiyi/s2i-base-container"
+            ref: "master"
           contextDir: "base/"
         strategy:
           type: Docker
@@ -130,8 +130,8 @@ data:
         source:
           type: Git
           git:
-            uri: "https://github.com/sclorg/s2i-python-container"
-            ref: "4d85c35"
+            uri: "https://gitee.com/zhaoxiyi/s2i-python-container"
+            ref: "master"
           contextDir: "3.8/"
         strategy:
           type: Docker
@@ -158,8 +158,8 @@ data:
         source:
           type: Git
           git:
-            uri: "https://github.com/thoth-station/s2i-thoth"
-            ref: "v0.28.0"
+            uri: "https://gitee.com/zhaoxiyi/s2i-thoth"
+            ref: "v0.35.1"
           contextDir: "ubi8-py38/"
         strategy:
           type: Docker
@@ -271,7 +271,7 @@ data:
           type: Git
           git:
             ref: python38
-            uri: 'https://github.com/thoth-station/s2i-minimal-notebook'
+            uri: 'https://gitee.com/zhaoxiyi/s2i-minimal-notebook'
         triggers:
           - type: ConfigChange
           - type: ImageChange
@@ -301,7 +301,7 @@ data:
           type: Git
           git:
             ref: python38
-            uri: 'https://github.com/thoth-station/s2i-tensorflow-gpu-notebook'
+            uri: 'https://gitee.com/zhaoxiyi/s2i-tensorflow-gpu-notebook'
         triggers:
           - type: ConfigChange
           - type: ImageChange
@@ -331,7 +331,7 @@ data:
           type: Git
           git:
             ref: python38
-            uri: 'https://github.com/thoth-station/s2i-pytorch-notebook'
+            uri: 'https://githee.com/zhaoxyi/s2i-pytorch-notebook'
         triggers:
           - type: ConfigChange
           - type: ImageChange
