@@ -11,7 +11,7 @@ spec:
       name: s2i-lab-elyra:v0.1.5
   source:
     git:
-      uri: https://github.com/opendatahub-io/s2i-lab-elyra
+      uri: https://gitee.com/zhaoxiyi/s2i-lab-elyra
       ref: v0.1.5
     type: Git
   strategy:
