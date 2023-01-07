@@ -12,7 +12,7 @@ spec:
   source:
     git:
       uri: https://gitee.com/zhaoxiyi/s2i-lab-elyra
-      ref: v0.1.5
+      ref: v0.2.1
     type: Git
   strategy:
     sourceStrategy:
