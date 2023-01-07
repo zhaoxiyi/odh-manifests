@@ -11,7 +11,7 @@ spec:
       name: s2i-generic-data-science-notebook:local-build
   source:
     git:
-      uri: https://github.com/thoth-station/s2i-generic-data-science-notebook
+      uri: https://gitee.com/zhaoxiyi/s2i-generic-data-science-notebook
     type: Git
   strategy:
     sourceStrategy:
