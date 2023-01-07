@@ -104,10 +104,10 @@ images:
     newName: quay.io/internaldatahub/scheduledworkflow
     newTag: 1.1.0
   - name: viewer-crd-controller
-    newName: gcr.io/ml-pipeline/viewer-crd-controller
+    newName: quay.io/xiyzhao/ml-pipeline/viewer-crd-controller
     newTag: 1.7.0
   - name: visualization-server
-    newName: gcr.io/ml-pipeline/visualization-server
+    newName: quay.io/xiyzhao/ml-pipeline/visualization-server
     newTag: 1.7.0
   - name: api-server
     newName: quay.io/internaldatahub/api-server
